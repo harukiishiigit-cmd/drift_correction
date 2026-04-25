@@ -8,6 +8,5 @@ files:
 processing:
   x_threshold: 20.0
   y_threshold: 10.0
-  show_plot: true
   x_color: blue
   y_color: red
