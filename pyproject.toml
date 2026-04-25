@@ -33,6 +33,18 @@ dev = [
 [tool.setuptools]
 packages = ["drift_correction"]
 
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "N", "B", "UP", "SIM"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+
 [tool.black]
 line-length = 100
 target-version = ["py39"]
