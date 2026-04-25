@@ -23,6 +23,19 @@ def _load_config(config_path: Path) -> dict[str, Any]:
     return loaded
 
 
+def _generate_output_filename(input_filename: str) -> str:
+    """Generate output filename by appending '_corrected' before the file extension.
+    
+    Examples:
+        'data.txt' -> 'data_corrected.txt'
+        'Drift Profile for Frame Grabber.txt' -> 'Drift Profile for Frame Grabber_corrected.txt'
+    """
+    input_path = Path(input_filename)
+    stem = input_path.stem
+    suffix = input_path.suffix
+    return f"{stem}_corrected{suffix}"
+
+
 if __name__ == "__main__":
     project_root = _project_root()
 
@@ -44,7 +57,7 @@ if __name__ == "__main__":
     output_dir = project_root / str(paths_cfg.get("output_dir", "output"))
 
     input_name = str(files_cfg.get("input", "Drift Profile for ABFGrabber1.txt"))
-    output_name = str(files_cfg.get("output", "Drift Profile for ABFGrabber1_corrected.txt"))
+    output_name = _generate_output_filename(input_name)
 
     input_file = data_dir / input_name
     if not input_file.exists():

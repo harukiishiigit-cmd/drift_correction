@@ -4,7 +4,6 @@ paths:
 
 files:
   input: Drift Profile for ABFGrabber1.txt
-  output: Drift Profile for ABFGrabber1_corrected.txt
 
 processing:
   x_threshold: 20.0
