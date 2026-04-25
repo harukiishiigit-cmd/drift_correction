@@ -36,7 +36,8 @@ def _generate_output_filename(input_filename: str) -> str:
     return f"{stem}_corrected{suffix}"
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Main entry point for drift correction processing."""
     project_root = _project_root()
 
     # Ensure imports from the project root (e.g., src.drift_correction.*) are available.
@@ -73,3 +74,7 @@ if __name__ == "__main__":
         x_color=str(processing_cfg.get("x_color", "blue")),
         y_color=str(processing_cfg.get("y_color", "red")),
     )
+
+
+if __name__ == "__main__":
+    main()
