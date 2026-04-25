@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import shutil
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -55,7 +57,12 @@ def main() -> None:
         raise ValueError("Config sections 'paths', 'files', and 'processing' must be mappings.")
 
     data_dir = project_root / str(paths_cfg.get("input_dir", "data"))
-    output_dir = project_root / str(paths_cfg.get("output_dir", "output"))
+    output_base_dir = project_root / str(paths_cfg.get("output_dir", "output"))
+
+    # Create timestamped subdirectory for this execution
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_dir = output_base_dir / timestamp
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     input_name = str(files_cfg.get("input", "Drift Profile for ABFGrabber1.txt"))
     output_name = _generate_output_filename(input_name)
@@ -74,6 +81,13 @@ def main() -> None:
         x_color=str(processing_cfg.get("x_color", "blue")),
         y_color=str(processing_cfg.get("y_color", "red")),
     )
+
+    # Copy config.yaml to the output subdirectory
+    config_source = project_root / "config.yaml"
+    config_dest = output_dir / "config.yaml"
+    shutil.copy2(config_source, config_dest)
+    
+    print(f"Processing completed. Results saved to: {output_dir}")
 
 
 if __name__ == "__main__":
