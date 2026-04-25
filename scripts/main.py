@@ -42,10 +42,10 @@ def main() -> None:
     """Main entry point for drift correction processing."""
     project_root = _project_root()
 
-    # Ensure imports from the project root (e.g., src.drift_correction.*) are available.
-    sys.path.insert(0, str(project_root))
+    # Ensure imports from the src layout package are available.
+    sys.path.insert(0, str(project_root / "src"))
 
-    from src.drift_correction.processor import process_drift_data
+    from drift_correction.processor import process_drift_data
 
     config = _load_config(project_root / "config.yaml")
 
