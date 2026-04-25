@@ -20,16 +20,16 @@ RangeList = list[tuple[int, int]]
 def detect_ranges(
     data: FloatArray,
     threshold: float = 50.0,
-    show_plot: bool = True,
-    color: str = "black",
+    output_dir: str | None = None,
+    axis_name: str = "data",
 ) -> RangeList:
     """Detect contiguous ranges separated by large jumps.
 
     Args:
         data: 1D drift signal.
         threshold: Absolute difference threshold used as a boundary.
-        show_plot: If True, show the data with detected boundaries.
-        color: Line color for plotting.
+        output_dir: Directory to save plot image. If None, no plot is saved.
+        axis_name: Name of the axis (e.g., 'x', 'y') for plot filename.
 
     Returns:
         List of (start, end) index pairs where end is exclusive.
@@ -44,10 +44,10 @@ def detect_ranges(
 
     ranges.append((start_idx, len(data)))
 
-    if show_plot:
+    if output_dir:
         x_vals = np.arange(len(data), dtype=np.int64)
         plt.figure(figsize=(10, 5))
-        plt.plot(x_vals, data, label="Original Data", linestyle="-", color=color)
+        plt.plot(x_vals, data, label="Original Data", linestyle="-")
         for i, (start, end) in enumerate(ranges):
             plt.axvline(
                 x=start,
@@ -61,7 +61,11 @@ def detect_ranges(
         plt.ylabel("Value")
         plt.legend()
         plt.grid(True)
-        plt.show()
+        
+        output_path = Path(output_dir)
+        plot_path = output_path / f"{axis_name}_ranges.png"
+        plt.savefig(plot_path, dpi=100, bbox_inches="tight")
+        plt.close()
 
     return ranges
 
@@ -69,16 +73,16 @@ def detect_ranges(
 def correct_discontinuity(
     data: FloatArray,
     ranges: RangeList,
-    show_plot: bool = True,
-    color: str = "black",
+    output_dir: str | None = None,
+    axis_name: str = "data",
 ) -> FloatArray:
     """Correct range-to-range discontinuities using linear extrapolation.
 
     Args:
         data: 1D drift signal before correction.
         ranges: Output ranges from detect_ranges.
-        show_plot: If True, show corrected data with range boundaries.
-        color: Line color for plotting.
+        output_dir: Directory to save plot image. If None, no plot is saved.
+        axis_name: Name of the axis (e.g., 'x', 'y') for plot filename.
 
     Returns:
         Corrected 1D drift signal.
@@ -109,9 +113,9 @@ def correct_discontinuity(
 
         corrected_data[start:end] -= shift
 
-    if show_plot:
+    if output_dir:
         plt.figure(figsize=(12, 5))
-        plt.plot(x_vals, corrected_data, label="Corrected Data", color=color)
+        plt.plot(x_vals, corrected_data, label="Corrected Data")
 
         for i, (start, end) in enumerate(ranges):
             plt.axvline(
@@ -127,7 +131,11 @@ def correct_discontinuity(
         plt.title("Corrected Data with Range Boundaries")
         plt.grid(True)
         plt.legend()
-        plt.show()
+        
+        output_path = Path(output_dir)
+        plot_path = output_path / f"{axis_name}_corrected.png"
+        plt.savefig(plot_path, dpi=100, bbox_inches="tight")
+        plt.close()
 
     return corrected_data
 
@@ -138,21 +146,15 @@ def process_drift_data(
     filename: str,
     x_threshold: float = 20.0,
     y_threshold: float = 10.0,
-    show_plot: bool = False,
-    x_color: str = "blue",
-    y_color: str = "red",
 ) -> None:
     """Run drift correction pipeline for X/Y drift and save the result.
 
     Args:
         filepath: Path to input text file loaded via np.loadtxt.
-        output_dir: Directory for saving corrected output.
+        output_dir: Directory for saving corrected output and plots.
         filename: Output filename.
         x_threshold: Range detection threshold for X drift.
         y_threshold: Range detection threshold for Y drift.
-        show_plot: If True, show plots during processing.
-        x_color: Plot color for X drift.
-        y_color: Plot color for Y drift.
 
     Returns:
         None.
@@ -166,11 +168,11 @@ def process_drift_data(
     x_drift: FloatArray = np.asarray(data[0], dtype=np.float64)
     y_drift: FloatArray = np.asarray(data[1], dtype=np.float64)
 
-    x_ranges = detect_ranges(x_drift, threshold=x_threshold, show_plot=show_plot, color=x_color)
-    x_corrected = correct_discontinuity(x_drift, x_ranges, show_plot=show_plot, color=x_color)
+    x_ranges = detect_ranges(x_drift, threshold=x_threshold, output_dir=output_dir, axis_name="x")
+    x_corrected = correct_discontinuity(x_drift, x_ranges, output_dir=output_dir, axis_name="x")
 
-    y_ranges = detect_ranges(y_drift, threshold=y_threshold, show_plot=show_plot, color=y_color)
-    y_corrected = correct_discontinuity(y_drift, y_ranges, show_plot=show_plot, color=y_color)
+    y_ranges = detect_ranges(y_drift, threshold=y_threshold, output_dir=output_dir, axis_name="y")
+    y_corrected = correct_discontinuity(y_drift, y_ranges, output_dir=output_dir, axis_name="y")
 
     indices: npt.NDArray[np.int64] = np.arange(1, len(x_corrected) + 1, dtype=np.int64)
     combined = np.column_stack((indices, x_corrected, y_corrected))

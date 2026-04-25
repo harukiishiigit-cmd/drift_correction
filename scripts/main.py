@@ -77,9 +77,6 @@ def main() -> None:
         filename=output_name,
         x_threshold=float(processing_cfg.get("x_threshold", 20.0)),
         y_threshold=float(processing_cfg.get("y_threshold", 10.0)),
-        show_plot=bool(processing_cfg.get("show_plot", False)),
-        x_color=str(processing_cfg.get("x_color", "blue")),
-        y_color=str(processing_cfg.get("y_color", "red")),
     )
 
     # Copy config.yaml to the output subdirectory
