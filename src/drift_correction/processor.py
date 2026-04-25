@@ -132,13 +132,27 @@ def correct_discontinuity(
     return corrected_data
 
 
-def process_drift_data(filepath: str, output_dir: str, filename: str) -> None:
+def process_drift_data(
+    filepath: str,
+    output_dir: str,
+    filename: str,
+    x_threshold: float = 20.0,
+    y_threshold: float = 10.0,
+    show_plot: bool = False,
+    x_color: str = "blue",
+    y_color: str = "red",
+) -> None:
     """Run drift correction pipeline for X/Y drift and save the result.
 
     Args:
         filepath: Path to input text file loaded via np.loadtxt.
         output_dir: Directory for saving corrected output.
         filename: Output filename.
+        x_threshold: Range detection threshold for X drift.
+        y_threshold: Range detection threshold for Y drift.
+        show_plot: If True, show plots during processing.
+        x_color: Plot color for X drift.
+        y_color: Plot color for Y drift.
 
     Returns:
         None.
@@ -152,11 +166,11 @@ def process_drift_data(filepath: str, output_dir: str, filename: str) -> None:
     x_drift: FloatArray = np.asarray(data[0], dtype=np.float64)
     y_drift: FloatArray = np.asarray(data[1], dtype=np.float64)
 
-    x_ranges = detect_ranges(x_drift, threshold=20.0, show_plot=False, color="blue")
-    x_corrected = correct_discontinuity(x_drift, x_ranges, show_plot=False, color="blue")
+    x_ranges = detect_ranges(x_drift, threshold=x_threshold, show_plot=show_plot, color=x_color)
+    x_corrected = correct_discontinuity(x_drift, x_ranges, show_plot=show_plot, color=x_color)
 
-    y_ranges = detect_ranges(y_drift, threshold=10.0, show_plot=False, color="red")
-    y_corrected = correct_discontinuity(y_drift, y_ranges, show_plot=False, color="red")
+    y_ranges = detect_ranges(y_drift, threshold=y_threshold, show_plot=show_plot, color=y_color)
+    y_corrected = correct_discontinuity(y_drift, y_ranges, show_plot=show_plot, color=y_color)
 
     indices: npt.NDArray[np.int64] = np.arange(1, len(x_corrected) + 1, dtype=np.int64)
     combined = np.column_stack((indices, x_corrected, y_corrected))

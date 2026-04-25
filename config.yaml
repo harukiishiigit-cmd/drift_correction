@@ -1,0 +1,14 @@
+paths:
+  input_dir: data
+  output_dir: output
+
+files:
+  input: Drift Profile for ABFGrabber1.txt
+  output: Drift Profile for ABFGrabber1_corrected.txt
+
+processing:
+  x_threshold: 20.0
+  y_threshold: 10.0
+  show_plot: false
+  x_color: blue
+  y_color: red
