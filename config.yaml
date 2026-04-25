@@ -3,7 +3,7 @@ paths:
   output_dir: output
 
 files:
-  input: Drift Profile for ABFGrabber1.txt
+  input: Drift Profile for Frame Grabber 100 frames_3_20M_P8.txt
 
 processing:
   x_threshold: 20.0
