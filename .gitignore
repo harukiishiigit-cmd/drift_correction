@@ -146,8 +146,8 @@ env.bak/
 venv.bak/
 
 # Project data and generated results
-outputs/
-Data/
+output/
+data/
 
 # Spyder project settings
 .spyderproject
