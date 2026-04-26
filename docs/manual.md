@@ -9,6 +9,8 @@
 1. `Technique Manager` → `Process Image` → `Spatial Alignment` を選択し、`Automatic` に設定します。
 2. `Image Filter`（Sobel など）を選択し、`Measure` を実行します。
 
+![Spatial Alignment settings](./images/spacial_alignment_settings.jpg)
+
 <details>
 <summary>補足: DigitalMicrograph (DM) フィルタ定義の確認手順</summary>
 
@@ -17,12 +19,17 @@ DigitalMicrograph 内で使用される各フィルタ（Bandpass、Sobel など
 1. ヘルプメニューの起動
    - DM のメニューバーから `Help` > `Search...` を選択します。
    - ヘルプウィンドウ左側で `目次` タブを使用します。
+
+![Help menu search](./images/help_menu_search.jpg)
+
 2. 該当項目のナビゲーション
    - 以下のツリーを順番に展開します。
    - `Image Filtering`
    - `Filter Categories`
 3. 内容の確認
    - `Filter Categories` を選択すると、右側パネルにフィルタ一覧と詳細情報が表示されます。
+
+![Filter Categories view](./images/filter_categories.jpg)
 
 </details>
 
@@ -31,7 +38,11 @@ DigitalMicrograph 内で使用される各フィルタ（Bandpass、Sobel など
 - 空間的に似た場所が多い画像データでは、途中で基準位置を誤認識することがあります。
 - その結果、補正値が急激に跳ね上がり（ズレ）、連続性が崩れる場合があります。
 
+![Alignment failure graph](./images/alignment_failure_graph.jpg)
+
 ### 手動での修正手順（Manualモード）
+
+![Manual alignment settings](./images/manual_alignment_settings.jpg)
 
 ズレた箇所をソフトウェア上で手動修正する場合は、以下の手順で行います。
 
@@ -55,12 +66,23 @@ DigitalMicrograph 内で使用される各フィルタ（Bandpass、Sobel など
 自動補正で算出した「ズレてしまった数値データ」を一度書き出します。
 
 1. ソフトウェアのメニューから `File` > `Save As` を選択します。
+
+![File Save As menu](./images/file_save_as_menu.jpg)
+
 2. 保存形式を **Text Format** にしてデータを保存します。
+
+![Save As Text Format dialog](./images/save_as_text_format_dialog.jpg)
 
 ### ステップ2: プログラム（Drift Collection）の準備
 
 1. 保存したテキストファイルを、プログラムの `data` フォルダ内にドラッグ＆ドロップして配置します。
+
+![Data folder](./images/data_folder.jpg)
+
 2. `config` ファイルを開き、読み込ませたいファイル名（ステップ1で保存したファイル名）を入力します。
+
+![Config YAML settings](./images/config_yaml_settings.jpg)
+
 3. `Ctrl + S` などで `config` ファイルを保存します。
 
 補足:
