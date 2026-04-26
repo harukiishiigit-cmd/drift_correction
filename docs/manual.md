@@ -9,6 +9,27 @@
 1. `Technique Manager` の `Process Image` にある `Spatial Alignment` を `Automatic` に設定します。
 2. `Image Filter`（Sobel など）を選択し、`Measure` を実行します。
 
+### 補足: DigitalMicrograph (DM) フィルタ定義の確認手順
+
+DigitalMicrograph 内で使用される各フィルタ（Bandpass、Sobel など）のアルゴリズムや数学的定義は、内蔵ヘルプから確認できます。
+
+### 1. ヘルプメニューの起動
+
+1. DM のメニューバーから `Help` > `Search...` を選択します。
+2. ヘルプウィンドウ左側で `Contents` または `Search` タブを使用します。
+
+### 2. 該当項目のナビゲーション
+
+以下のツリーを順番に展開します。
+
+1. `DigitalMicrograph`（または `GMS`）
+2. `Image Filtering`
+3. `Filter Categories`
+
+### 3. 内容の確認
+
+`Filter Categories` を選択すると、右側パネルにフィルタ一覧と詳細情報が表示されます。
+
 ### 発生する問題
 
 - 空間的に似た場所が多い画像データでは、途中で基準位置を誤認識することがあります。
