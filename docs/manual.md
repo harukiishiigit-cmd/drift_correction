@@ -16,10 +16,9 @@ DigitalMicrograph 内で使用される各フィルタ（Bandpass、Sobel など
 
 1. ヘルプメニューの起動
 	- DM のメニューバーから `Help` > `Search...` を選択します。
-	- ヘルプウィンドウ左側で `Contents` または `Search` タブを使用します。
+	- ヘルプウィンドウ左側で `目次` タブを使用します。
 2. 該当項目のナビゲーション
 	- 以下のツリーを順番に展開します。
-	- `DigitalMicrograph`（または `GMS`）
 	- `Image Filtering`
 	- `Filter Categories`
 3. 内容の確認
