@@ -107,6 +107,13 @@ DigitalMicrograph 内で使用される各フィルタ（Bandpass、Sobel など
 1. ソフトウェアの `Technique Manager` を開き、`Automatic` から `Manual` に変更して `Measure` を押します。
 2. `Next` ボタンでインデックス（画像枚数）を進めながら、プログラム出力テキストに記載された数値（X, Y の小数第 1 位まで）を、該当インデックスへ入力します。
 
+### ステップ5: 補正値でドリフト補正
+
+1. 数値の修正が完了したら、`Spatial Alignment` の `Remove Measured Drift` ボタンを押して、補正値を適用します。
+2. `Remove Measured Drift` ボタンは表示位置が分かりにくく、隠れて見えにくい場合があるため注意してください。
+
+![Remove Measured Drift button](./images/remove_measured_drift_button.jpg)
+
 ### 微調整と仕上げ
 
 - プログラムによる補正は簡易的な計算に基づきます。
