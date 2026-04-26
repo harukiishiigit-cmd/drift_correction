@@ -6,7 +6,7 @@
 
 ### 自動補正の実行
 
-1. `Technique Manager` の `Process Image` で、`Spatial Alignment` を `Automatic` に設定します。
+1. `Technique Manager` → `Process Image` → `Spatial Alignment` を選択し、`Automatic` に設定します。
 2. `Image Filter`（Sobel など）を選択し、`Measure` を実行します。
 
 <details>
