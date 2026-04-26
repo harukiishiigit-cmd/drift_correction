@@ -3,10 +3,10 @@ paths:
   output_dir: output
 
 files:
-  input: Drift Profile for Frame Grabber 100 frames_3_20M.txt
+  input: Drift Profile for Frame Grabber 100 frames.txt
 
 processing:
   x_threshold: 20.0
-  y_threshold: 10.0
+  y_threshold: 20.0
   x_color: blue
   y_color: red
