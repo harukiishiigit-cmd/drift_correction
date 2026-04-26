@@ -78,10 +78,9 @@ DigitalMicrograph 内で使用される各フィルタ（Bandpass、Sobel など
 ![Data folder](./images/data_folder.jpg)
 
 2. `config` ファイルを開き、読み込ませたいファイル名（ステップ1で保存したファイル名）を入力します。
+3. `Ctrl + S` などで `config` ファイルを保存します。
 
 ![Config YAML settings](./images/config_yaml_settings.jpg)
-
-3. `Ctrl + S` などで `config` ファイルを保存します。
 
 補足:
 
